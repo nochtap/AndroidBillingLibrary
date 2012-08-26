@@ -101,6 +101,9 @@ public class BillingController {
 			manualConfirmations.put(itemId, notifications);
 		}
 		notifications.add(notificationId);
+		debug("manualConfirmations: ");
+		debug(manualConfirmations.toString());
+		debug("===");
 	}
 
 	/**
@@ -388,6 +391,7 @@ public class BillingController {
 			Log.w(LOG_TAG, "Signed data is empty");
 			return;
 		} else {
+			debug("!Signed data");
 			debug(signedData);
 		}
 
@@ -418,6 +422,7 @@ public class BillingController {
 		}
 
 		ArrayList<String> confirmations = new ArrayList<String>();
+		debug("!auto confirmations: "+automaticConfirmations.toString());
 		for (Transaction p : purchases) {
 			if (p.notificationId != null && automaticConfirmations.contains(p.productId)) {
 				confirmations.add(p.notificationId);

@@ -74,6 +74,10 @@ public abstract class AbstractBillingActivity extends Activity implements Billin
 	public abstract void onBillingChecked(boolean supported);
 	
 	public abstract void onSubscriptionChecked(boolean supported);
+	
+	public abstract void onPurchaseStateChanged(String itemId, PurchaseState state);;
+
+	public abstract void onRequestPurchaseResponse(String itemId, ResponseCode response);
 
 	@Override
 	protected void onCreate(android.os.Bundle savedInstanceState) {
@@ -115,10 +119,6 @@ public abstract class AbstractBillingActivity extends Activity implements Billin
 		// destroy
 		BillingController.setConfiguration(null);
 	}
-
-	public abstract void onPurchaseStateChanged(String itemId, PurchaseState state);;
-
-	public abstract void onRequestPurchaseResponse(String itemId, ResponseCode response);
 
 	/**
 	 * Requests the purchase of the specified item. The transaction will not be

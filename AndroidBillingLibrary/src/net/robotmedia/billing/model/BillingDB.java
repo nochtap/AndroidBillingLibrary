@@ -32,7 +32,7 @@ public class BillingDB {
     public static final String COLUMN_PRODUCT_ID = "productId";
     public static final String COLUMN_PURCHASE_TIME = "purchaseTime";
     public static final String COLUMN_DEVELOPER_PAYLOAD = "developerPayload";
-
+    
     private static final String[] TABLE_TRANSACTIONS_COLUMNS = {
     	COLUMN__ID, COLUMN_PRODUCT_ID, COLUMN_STATE,
     	COLUMN_PURCHASE_TIME, COLUMN_DEVELOPER_PAYLOAD

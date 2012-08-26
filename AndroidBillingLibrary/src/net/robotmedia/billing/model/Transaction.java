@@ -45,7 +45,7 @@ public class Transaction {
 	static final String PACKAGE_NAME = "packageName";
 	static final String PRODUCT_ID = "productId";
 	static final String PURCHASE_STATE = "purchaseState";
-
+	static final String PURCHASE_TOKEN = "purchaseToken";
 	static final String PURCHASE_TIME = "purchaseTime";
 	
     public static Transaction parse(JSONObject json) throws JSONException {
@@ -58,6 +58,7 @@ public class Transaction {
         transaction.orderId = json.optString(ORDER_ID, null);
         transaction.notificationId = json.optString(NOTIFICATION_ID, null);
         transaction.developerPayload = json.optString(DEVELOPER_PAYLOAD, null);
+        transaction.purchaseToken = json.optString(PURCHASE_TOKEN, null);
         return transaction;
     }
 
@@ -66,13 +67,14 @@ public class Transaction {
     public String orderId;
     public String packageName;
     public String productId;
+    public String purchaseToken;
     public PurchaseState purchaseState;
     public long purchaseTime;
     
     public Transaction() {}
     
     public Transaction(String orderId, String productId, String packageName, PurchaseState purchaseState,
-			String notificationId, long purchaseTime, String developerPayload) {
+			String notificationId, long purchaseTime, String developerPayload, String purchaseToken) {
 		this.orderId = orderId;
 		this.productId = productId;
 		this.packageName = packageName;
@@ -80,10 +82,11 @@ public class Transaction {
 		this.notificationId = notificationId;
 		this.purchaseTime = purchaseTime;
 		this.developerPayload = developerPayload;
+		this.purchaseToken = purchaseToken;
 	}
     
 	public Transaction clone() {
-		return new Transaction(orderId, productId, packageName, purchaseState, notificationId, purchaseTime, developerPayload);
+		return new Transaction(orderId, productId, packageName, purchaseState, notificationId, purchaseTime, developerPayload, purchaseToken);
 	}
 
 	@Override
@@ -124,6 +127,17 @@ public class Transaction {
 			return false;
 		if (purchaseTime != other.purchaseTime)
 			return false;
+		
+		if(purchaseToken == null)
+		{
+			if(other.purchaseToken != null) 
+				return false;
+		}
+		else if(!purchaseToken.equals(other.purchaseToken))
+		{
+			return false;
+		}
+			
 		return true;
 	}
 	
